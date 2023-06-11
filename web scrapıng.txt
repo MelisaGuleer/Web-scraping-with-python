@@ -1,0 +1,15 @@
+import json
+
+import requests
+
+URL = "https://talosintelligence.com/cloud_intel/top_senders_list"
+headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36"}
+page = requests.get(URL, headers=headers).content.decode("utf-8")
+
+page_json = json.loads(page)
+spam = (page_json["spam"])
+for line in spam:
+    print(line["ip"]["ipv4_addr"])
+
+for host in spam:
+    print(host["ip"]["hostname"])

@@ -1,0 +1,12 @@
+from bs4 import BeautifulSoup
+import requests
+
+URL = "https://www.maxmind.com/en/high-risk-ip-sample-list"
+page = requests.get(URL).content.decode("utf-8")
+soup = BeautifulSoup(page,'html.parser')
+page_wrapper = soup.find("div",{"id":"content"})
+href = page_wrapper.find_all("a")
+for line in href[3:]:
+     line = str(line.get('href'))
+     split_line = line.split("/")
+     print(split_line[3])

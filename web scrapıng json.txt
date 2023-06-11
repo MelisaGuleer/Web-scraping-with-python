@@ -1,0 +1,10 @@
+import json
+import requests
+from pprint import pprint
+
+URL ="https://raw.githubusercontent.com/Ultimate-Hosts-Blacklist/Ultimate.Hosts.Blacklist/master/superhosts.deny/superhosts1.deny"
+page = requests.get(URL).content.decode("utf-8")
+list = page.split("\n")
+for line in list:
+    if "ALL:" in line:
+        print(line[5:])
